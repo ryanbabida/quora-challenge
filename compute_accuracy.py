@@ -1,7 +1,6 @@
 import sys
 
-from preprocessing import *
-from training import *
+from data_processing import *
 
 
 def main():

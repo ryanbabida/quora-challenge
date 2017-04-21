@@ -30,6 +30,8 @@ def calc_accuracy():
     accuracy = get_accuracy(overlap_scores, data, threshold)
     print("%.4f" % accuracy)
 
+    return accuracy
+
 
 if __name__ == "__main__":
     calc_accuracy()

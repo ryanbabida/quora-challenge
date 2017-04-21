@@ -31,6 +31,8 @@ def accuracy_remove_stops():
     accuracy = get_accuracy(overlap_scores, data, threshold)
     print("%.4f" % accuracy)
 
+    return accuracy
+
 
 if __name__ == "__main__":
     accuracy_remove_stops()

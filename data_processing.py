@@ -1,12 +1,11 @@
 import csv
-from string import maketrans
 from collections import defaultdict
 
 # needed for stop words
 MAX_FREQUENCY = 10000
 
 
-def preprocessing(str_in):
+def preprocess(str_in):
     """ creates a translation from special characters to whitespaces
         then applies the translation to the sentences and splits
         to get each word
@@ -15,10 +14,12 @@ def preprocessing(str_in):
     """
     outtab = "         "
     intab = "?,!.()'\":"
-    trantab = maketrans(intab, outtab)
+    trantab = str.maketrans(intab, outtab)
 
     str_out = str_in.lower()
-    str_out = str_out.translate(trantab, '-').split(" ")
+    str_out = str_out.translate(trantab)
+    str_out = str_out.replace('-', '')
+    str_out = str_out.split(" ")
     return [word for word in str_out if word != '']
 
 
@@ -42,8 +43,8 @@ def preprocess_data(data):
         @data - raw data read from csv files
     """
     for question_pair in data:
-        question_pair[3] = preprocessing(question_pair[3])
-        question_pair[4] = preprocessing(question_pair[4])
+        question_pair[3] = preprocess(question_pair[3])
+        question_pair[4] = preprocess(question_pair[4])
 
     return data
 
@@ -102,7 +103,7 @@ def get_min_mid_max(scores):
         @scores - overlap scores from the data
     """
     scores = sorted(scores)
-    return scores[0], scores[len(scores) / 2], scores[len(scores) - 1]
+    return scores[0], scores[int(len(scores) / 2)], scores[len(scores) - 1]
 
 
 def get_accuracy(scores, data, threshold):

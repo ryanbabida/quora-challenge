@@ -3,29 +3,34 @@ import sys
 from data_processing import *
 
 
-def main():
+def accuracy_remove_stops():
     if len(sys.argv) != 3:
-        print "Not correct amount of args."
+        print("Not correct amount of args.")
         quit()
 
+    # makes sure arg is a number
     try:
         float(sys.argv[2])
     except:
         raise TypeError
 
-    if sys.argv[2] > 1.0:
+    # checks if threshold is valid
+    if float(sys.argv[2]) > 1.0:
         raise ValueError
 
+    # process data and remove the stop words
     data = read_file(sys.argv[1])
     data = preprocess_data(data)
+    data = remove_stop_words(data)
 
     overlap_scores = get_overlap_scores(data)
 
     threshold = float(sys.argv[2])
 
+    # uses overlap scores to calculate accuracy
     accuracy = get_accuracy(overlap_scores, data, threshold)
-    print accuracy
+    print("%.4f" % accuracy)
 
 
 if __name__ == "__main__":
-    main()
+    accuracy_remove_stops()

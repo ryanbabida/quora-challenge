@@ -1,10 +1,10 @@
 
 
 def get_overlap_scores(data):
-    ''' calcultes overlapp scores for each question pair
+    """ calcultes overlapp scores for each question pair
         @data - the data that has been preprocessed
         @scores - calculated scores
-    '''
+    """
     scores = list()
     for question_pair in data:
         overlap_score = 0.0
@@ -30,23 +30,23 @@ def get_overlap_scores(data):
 
 
 def get_min_mid_max(scores):
-    ''' gets the min, median, and max overlapping scores
+    """ gets the min, median, and max overlapping scores
         sorts the scores and gets the three values
         @scores - overlap scores from the data
-    '''
+    """
     scores = sorted(scores)
     return scores[0], scores[len(scores) / 2], scores[len(scores) - 1]
 
 
 def get_accuracy(scores, data, threshold):
-    ''' check based on threshold, assign a 0 or 1 with the scores
+    """ check based on threshold, assign a 0 or 1 with the scores
         compare with actual data from csv and if they are the same
         increase the correct count
         @scores - overlap scores 
         @data - need the data to get the correct target values for comparison
         @threshold - used to classify scores as 0 or 1
         returns the percentage of correct predictions
-    '''
+    """
     correct = 0.0
     for i in range(len(scores)):
         if ((float(scores[i]) - threshold >= 0 and data[i][5] == 1) or 
@@ -55,5 +55,5 @@ def get_accuracy(scores, data, threshold):
 
     return correct / len(scores)
 
-        
+
 

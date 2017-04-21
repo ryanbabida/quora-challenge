@@ -4,7 +4,7 @@ from preprocessing import *
 from training import *
 
 
-def main(): 
+def main():
     if len(sys.argv) != 3:
         print "Not correct amount of args."
         quit()
@@ -26,7 +26,7 @@ def main():
 
     # print "Min:", _min, "Med:", _mid, "Max:", _max
 
-    try: 
+    try:
         float(sys.argv[2])
     except:
         raise TypeError
@@ -35,9 +35,6 @@ def main():
 
     res = get_accuracy(overlap_scores, data, threshold)
     print res
-
-
-
 
 
 if __name__ == "__main__":
